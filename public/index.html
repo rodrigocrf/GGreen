@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="GGreen - Assistente avançado e analítico de apostas esportivas baseado em dados e gestão de risco com Critério de Kelly Fracionado.">
+  <title>GGreen // Terminal Analítico de Risco</title>
+  
+  <!-- Fontes do Google: Space Grotesk (Títulos) e JetBrains Mono (Dados/Fórmulas) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Folha de Estilos Principal -->
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="terminal-container">
+    
+    <!-- HEADER DO TERMINAL -->
+    <header class="terminal-header">
+      <div class="header-brand">
+        <span class="brand-glitch">GGREEN // CORE_v1.0</span>
+        <span class="system-status" id="system-status-indicator">
+          <span class="status-dot pulse"></span> API: <span id="status-text">OFFLINE</span>
+        </span>
+      </div>
+      <div class="header-metadata">
+        <span class="meta-item">SYS_LOC: LOCALHOST</span>
+        <span class="meta-item" id="live-timer">00:00:00</span>
+      </div>
+    </header>
+
+    <!-- ÁREA PRINCIPAL DE CONTEÚDO (GRID INDUSTRIAL) -->
+    <main class="terminal-grid">
+      
+      <!-- CARD 1: BANCA & SIMULAÇÃO FINANCEIRA (KELLY FRACIONADO) -->
+      <section class="panel panel-finance" id="panel-finance-section">
+        <div class="panel-header">
+          <h2>[01] BANCA & CONTROLE DE RISCO</h2>
+          <span class="panel-subtitle">Algoritmo de Kelly Fracionado</span>
+        </div>
+        <div class="panel-body">
+          <form id="finance-form" onsubmit="return false;">
+            <div class="input-group">
+              <label for="input-bank">
+                Banca Total (R$)
+                <button type="button" class="help-trigger" id="help-btn-bank" data-help="bank" aria-label="Ajuda sobre Banca Total">?</button>
+              </label>
+              <input type="number" id="input-bank" placeholder="Ex: 10000.00" min="0.01" step="0.01" required>
+            </div>
+            <div class="input-row">
+              <div class="input-group">
+                <label for="input-odds">
+                  Odd da Casa (Ex: 2.00)
+                  <button type="button" class="help-trigger" id="help-btn-odds" data-help="odds" aria-label="Ajuda sobre Odd da Casa">?</button>
+                </label>
+                <input type="number" id="input-odds" placeholder="Ex: 2.00" min="1.01" step="0.01" required>
+              </div>
+              <div class="input-group">
+                <label for="input-probability">
+                  Sua Probabilidade (%)
+                  <button type="button" class="help-trigger" id="help-btn-probability" data-help="probability" aria-label="Ajuda sobre Sua Probabilidade">?</button>
+                </label>
+                <input type="number" id="input-probability" placeholder="Ex: 60" min="1" max="99" required>
+              </div>
+            </div>
+            
+            <div class="fraction-selector">
+              <span class="selector-label">
+                Frações de Kelly:
+                <button type="button" class="help-trigger" id="help-btn-fraction" data-help="fraction" aria-label="Ajuda sobre Frações de Kelly">?</button>
+              </span>
+              <div class="radio-buttons">
+                <label class="radio-label">
+                  <input type="radio" name="kelly-fraction" value="0.25" checked id="radio-quarter">
+                  <span>1/4 Kelly (Recomendado)</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="kelly-fraction" value="0.50" id="radio-half">
+                  <span>1/2 Kelly (Moderado)</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="kelly-fraction" value="1.00" id="radio-full">
+                  <span>Full Kelly (Agressivo)</span>
+                </label>
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary" id="btn-calculate-risk">CALCULAR DIRETRIZ FINANCEIRA</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- CARD 2: TERMÔMETRO DE RISCO E RESULTADOS FINANCEIROS -->
+      <section class="panel panel-metrics" id="panel-metrics-section">
+        <div class="panel-header">
+          <h2>[02] TERMÔMETRO DE ALOCAÇÃO DE RISCO</h2>
+          <span class="panel-subtitle">Análise Quantitativa de Ruína</span>
+        </div>
+        <div class="panel-body">
+          <div class="risk-gauge-container">
+            <!-- Termômetro visual customizado -->
+            <div class="risk-gauge">
+              <div class="risk-gauge-bar" id="risk-bar" style="width: 0%"></div>
+              <div class="risk-markers">
+                <span class="marker marker-safe"></span>
+                <span class="marker marker-kelly"></span>
+                <span class="marker marker-danger"></span>
+              </div>
+            </div>
+            <div class="gauge-labels">
+              <span>0%</span>
+              <span class="label-safe">Seguro (Até 1.5%)</span>
+              <span class="label-kelly">Kelly Justo</span>
+              <span class="label-danger">Ruína (>5%)</span>
+            </div>
+          </div>
+
+          <div class="results-grid">
+            <div class="result-tile">
+              <span class="tile-label">Stake Sugerida (%)</span>
+              <span class="tile-value highlight-value" id="result-stake-percent">0.00%</span>
+            </div>
+            <div class="result-tile">
+              <span class="tile-label">Valor do Investimento</span>
+              <span class="tile-value highlight-value" id="result-stake-value">R$ 0,00</span>
+            </div>
+            <div class="result-tile full-width">
+              <span class="tile-label">Avaliação do Investimento</span>
+              <span class="tile-value" id="result-evaluation">Aguardando dados...</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 3: ESTIMADOR DE ODD JUSTA (+EV) - FASE 1 CORE -->
+      <section class="panel panel-pricing full-span" id="panel-pricing-section">
+        <div class="panel-header">
+          <h2>[03] ESTIMADOR DE TRUE ODDS (FUTEBOL - POISSON MVP)</h2>
+          <span class="panel-subtitle">Expectativa de Gols Esperados (xG)</span>
+        </div>
+        <div class="panel-body">
+          <div class="input-row">
+            <div class="input-group">
+              <label for="input-xg-home">
+                xG Médio Mandante
+                <button type="button" class="help-trigger" id="help-btn-xg-home" data-help="xg-home" aria-label="Ajuda sobre xG Médio Mandante">?</button>
+              </label>
+              <input type="number" id="input-xg-home" placeholder="Ex: 1.85" min="0" step="0.01">
+            </div>
+            <div class="input-group">
+              <label for="input-xga-home">
+                xGA Médio Mandante
+                <button type="button" class="help-trigger" id="help-btn-xga-home" data-help="xga-home" aria-label="Ajuda sobre xGA Médio Mandante">?</button>
+              </label>
+              <input type="number" id="input-xga-home" placeholder="Ex: 1.10" min="0" step="0.01">
+            </div>
+            <div class="input-group">
+              <label for="input-xg-away">
+                xG Médio Visitante
+                <button type="button" class="help-trigger" id="help-btn-xg-away" data-help="xg-away" aria-label="Ajuda sobre xG Médio Visitante">?</button>
+              </label>
+              <input type="number" id="input-xg-away" placeholder="Ex: 1.40" min="0" step="0.01">
+            </div>
+            <div class="input-group">
+              <label for="input-xga-away">
+                xGA Médio Visitante
+                <button type="button" class="help-trigger" id="help-btn-xga-away" data-help="xga-away" aria-label="Ajuda sobre xGA Médio Visitante">?</button>
+              </label>
+              <input type="number" id="input-xga-away" placeholder="Ex: 1.65" min="0" step="0.01">
+            </div>
+          </div>
+
+          <button type="button" class="btn-secondary" id="btn-estimate-odds">PRECIFICAR PARTIDA (+EV)</button>
+
+          <div class="pricing-results" id="pricing-results-container" style="display: none;">
+            <div class="divider"></div>
+            <h3 class="results-title">True Odds Calculadas & Probabilidades</h3>
+            <div class="pricing-grid">
+              <div class="pricing-tile">
+                <span class="pricing-label">Vitória Mandante (1)</span>
+                <span class="pricing-prob" id="prob-home">0%</span>
+                <span class="pricing-odd" id="odd-home">Odd: 0.00</span>
+              </div>
+              <div class="pricing-tile">
+                <span class="pricing-label">Empate (X)</span>
+                <span class="pricing-prob" id="prob-draw">0%</span>
+                <span class="pricing-odd" id="odd-draw">Odd: 0.00</span>
+              </div>
+              <div class="pricing-tile">
+                <span class="pricing-label">Vitória Visitante (2)</span>
+                <span class="pricing-prob" id="prob-away">0%</span>
+                <span class="pricing-odd" id="odd-away">Odd: 0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- NOTIFICAÇÃO DO SISTEMA -->
+    <div class="system-logs">
+      <div class="log-title">[CONSOLE LOGS]</div>
+      <div class="log-lines" id="console-log-lines">
+        <div class="log-line text-dim">&gt; Terminal inicializado...</div>
+        <div class="log-line text-dim">&gt; Carregando algoritmos de precificação estatística...</div>
+      </div>
+    </div>
+
+    <!-- RODAPÉ DE RÍGIDA SEGURANÇA -->
+    <footer class="terminal-footer">
+      <div>GGREEN © 2026 // TECNOLOGIA ORGULHOSAMENTE MATEMÁTICA</div>
+      <div class="footer-links">
+        Fontes: 
+        <a href="https://understat.com" target="_blank" rel="noopener noreferrer">Understat</a> | 
+        <a href="https://fbref.com" target="_blank" rel="noopener noreferrer">FBref</a> | 
+        <a href="https://flashscore.com.br" target="_blank" rel="noopener noreferrer">Flashscore</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Caixinha de Ajuda Flutuante Dinâmica (Tooltip) -->
+  <div id="help-tooltip" class="help-tooltip" role="tooltip" aria-hidden="true"></div>
+
+  <!-- Script Lógico Principal -->
+  <script src="js/app.js"></script>
+</body>
+</html>

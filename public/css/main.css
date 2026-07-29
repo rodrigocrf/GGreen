@@ -1,0 +1,667 @@
+/* ==========================================================================
+   GGREEN // DESIGN SYSTEM & CSS FRAMEWORK (VANILLA CSS)
+   Aesthetic: Retro-futurista Industrial / Utilitarista Analítico
+   ========================================================================== */
+
+/* 1. VARIÁVEIS DO SISTEMA */
+:root {
+  /* Cores Principais (Baseadas em HSL para harmonia e precisão) */
+  --bg-primary: hsl(230, 20%, 8%);
+  --bg-secondary: hsl(230, 16%, 11%);
+  --bg-tertiary: hsl(230, 14%, 15%);
+  
+  --accent-green: hsl(142, 70%, 45%);
+  --accent-green-glow: hsla(142, 70%, 45%, 0.15);
+  --accent-green-dim: hsl(142, 40%, 30%);
+  
+  --accent-danger: hsl(354, 70%, 50%);
+  --accent-danger-glow: hsla(354, 70%, 50%, 0.15);
+  
+  --accent-warning: hsl(45, 80%, 50%);
+  
+  --text-primary: hsl(0, 0%, 94%);
+  --text-secondary: hsl(230, 10%, 65%);
+  --text-dim: hsl(230, 8%, 45%);
+  
+  --border-color: hsl(230, 15%, 20%);
+  --border-focus: hsl(142, 60%, 40%);
+  
+  /* Tipografia */
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Espaçamentos e Estrutura */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1.25rem;
+  --space-lg: 2rem;
+  --border-radius: 4px; /* Rígido e industrial, não muito arredondado */
+  
+  /* Transições */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. RESET E CONFIGURAÇÕES GERAIS */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  /* Grade técnica discreta */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center;
+  position: relative;
+  color: var(--text-primary);
+  font-family: var(--font-mono); /* Fonte mono por padrão para o estilo de terminal */
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Glow radial sci-fi de fundo (simula brilho de terminal) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 20%, hsla(142, 70%, 45%, 0.035) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--border-radius);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-green-dim);
+}
+
+/* 3. LAYOUT DO CONTÊINER DO TERMINAL */
+.terminal-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: var(--space-md);
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Header Estilizado */
+.terminal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px double var(--border-color);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.brand-glitch {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  color: var(--accent-green);
+  text-shadow: 0 0 10px var(--accent-green-glow);
+}
+
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 0.8rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 2px 8px;
+  border-radius: var(--border-radius);
+  color: var(--text-secondary);
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-danger);
+}
+
+.status-dot.active {
+  background-color: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+}
+
+.header-metadata {
+  display: flex;
+  gap: var(--space-md);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* 4. GRID INDUSTRIAL DO TERMINAL */
+.terminal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  flex-grow: 1;
+}
+
+@media (max-width: 900px) {
+  .terminal-grid {
+    grid-template-columns: 1fr;
+  }
+  .full-span {
+    grid-column: span 1 !important;
+  }
+}
+
+.full-span {
+  grid-column: span 2;
+}
+
+/* 5. PAINÉIS / CARDS UTILIÁRIOS */
+.panel {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bordas chanfradas e estilo sci-fi nos painéis */
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--border-color);
+}
+
+.panel-finance::before {
+  background-color: var(--accent-green-dim);
+}
+
+.panel-metrics::before {
+  background-color: var(--accent-green);
+}
+
+.panel-pricing::before {
+  background-color: var(--text-dim);
+}
+
+.panel-header {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-tertiary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.panel-header h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.panel-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.panel-body {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  flex-grow: 1;
+}
+
+/* 6. COMPONENTES DE FORMULÁRIO */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-md);
+}
+
+label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+}
+
+input {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: var(--space-sm) var(--space-md);
+  width: 100%;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 8px var(--accent-green-glow);
+}
+
+input::placeholder {
+  color: var(--text-dim);
+}
+
+/* Seletores customizados (Frações de Kelly) */
+.fraction-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.selector-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.radio-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.radio-label:hover {
+  border-color: var(--text-dim);
+}
+
+.radio-label input[type="radio"] {
+  width: auto;
+  accent-color: var(--accent-green);
+}
+
+.radio-label span {
+  font-size: 0.85rem;
+}
+
+/* Botões */
+button {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background-color: var(--accent-green);
+  color: var(--bg-primary);
+  border: 1px solid var(--accent-green);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--accent-green);
+  box-shadow: 0 0 15px var(--accent-green-glow);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-tertiary);
+  border-color: var(--text-primary);
+}
+
+/* 7. ELEMENTO ANCORA DE DIFERENCIAÇÃO: TERMÔMETRO DE RISCO */
+.risk-gauge-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+}
+
+.risk-gauge {
+  height: 20px;
+  background-color: var(--bg-tertiary);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+/* Gradiente linear industrial representando os níveis de risco */
+.risk-gauge-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-green) 20%, var(--accent-warning) 50%, var(--accent-danger) 90%);
+  transition: width 500ms cubic-bezier(0.1, 0.8, 0.3, 1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.risk-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--bg-primary);
+  opacity: 0.5;
+}
+
+.marker-safe { left: 30%; } /* Até 1.5% */
+.marker-kelly { left: 60%; } /* Kelly Ideal */
+.marker-danger { left: 90%; } /* Mais de 5% */
+
+.gauge-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.gauge-labels .label-safe { color: var(--accent-green); }
+.gauge-labels .label-kelly { color: var(--accent-warning); }
+.gauge-labels .label-danger { color: var(--accent-danger); }
+
+/* Bloco de resultados */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.result-tile {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+}
+
+.result-tile.full-width {
+  grid-column: span 2;
+}
+
+.tile-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.tile-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.highlight-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent-green);
+  text-shadow: 0 0 5px var(--accent-green-glow);
+}
+
+/* Níveis dinâmicos da avaliação */
+.text-safe { color: var(--accent-green); }
+.text-warning { color: var(--accent-warning); }
+.text-danger { color: var(--accent-danger); }
+
+/* 8. ESTIMADOR DE PARTIDAS (POISSON) RESULTS */
+.divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: var(--space-md) 0;
+}
+
+.results-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 600px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pricing-tile {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  transition: border-color var(--transition-fast);
+}
+
+.pricing-tile:hover {
+  border-color: var(--accent-green-dim);
+}
+
+.pricing-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.pricing-prob {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.pricing-odd {
+  font-size: 0.85rem;
+  color: var(--accent-green);
+}
+
+/* 9. LOGS DO SISTEMA E CONSOLE */
+.system-logs {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-sm) var(--space-md);
+  margin-top: var(--space-md);
+  font-size: 0.8rem;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.log-title {
+  color: var(--text-dim);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 2px;
+  margin-bottom: 4px;
+}
+
+.log-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.log-line {
+  color: var(--text-primary);
+}
+
+.text-dim {
+  color: var(--text-dim);
+}
+
+.text-success {
+  color: var(--accent-green);
+}
+
+.text-error {
+  color: var(--accent-danger);
+}
+
+/* 10. FOOTER */
+.terminal-footer {
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--space-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--accent-green);
+}
+
+/* 11. ANIMAÇÕES */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.4; }
+}
+
+.pulse {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* 12. EXPLICAÇÕES E HELP TOOLTIPS */
+.help-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--accent-green);
+  border: 1px solid var(--accent-green);
+  border-radius: 50%;
+  background-color: transparent;
+  margin-left: 6px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all var(--transition-fast);
+  padding: 0;
+  line-height: 1;
+}
+
+.help-trigger:hover, .help-trigger:focus {
+  background-color: var(--accent-green);
+  color: var(--bg-primary);
+  box-shadow: 0 0 8px var(--accent-green);
+  outline: none;
+}
+
+.help-tooltip {
+  position: absolute;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--accent-green);
+  color: var(--text-primary);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  max-width: 280px;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  display: none;
+  line-height: 1.4;
+  font-family: var(--font-mono);
+}
+
