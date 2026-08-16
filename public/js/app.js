@@ -1,5 +1,5 @@
 /**
- * GGREEN // Lógica Lógica Principal do Terminal Cliente
+ * GGREEN // Lógica Principal do Terminal Cliente
  * Foco: Gestão de Risco Finaceiro & Precificação Estatística
  */
 
@@ -13,7 +13,7 @@ const DOM = {
   statusText: document.getElementById('status-text'),
   liveTimer: document.getElementById('live-timer'),
   consoleLogs: document.getElementById('console-log-lines'),
-  
+
   // Calculadora de Risco
   inputBank: document.getElementById('input-bank'),
   inputOdds: document.getElementById('input-odds'),
@@ -23,7 +23,7 @@ const DOM = {
   resultStakePercent: document.getElementById('result-stake-percent'),
   resultStakeValue: document.getElementById('result-stake-value'),
   resultEvaluation: document.getElementById('result-evaluation'),
-  
+
   // Estimador de True Odds
   inputXgHome: document.getElementById('input-xg-home'),
   inputXgaHome: document.getElementById('input-xga-home'),
@@ -37,7 +37,7 @@ const DOM = {
   oddDraw: document.getElementById('odd-draw'),
   probAway: document.getElementById('prob-away'),
   oddAway: document.getElementById('odd-away'),
-  
+
   // Tooltip de Ajuda
   helpTooltip: document.getElementById('help-tooltip'),
 };
@@ -48,7 +48,7 @@ const DOM = {
 async function initTerminal() {
   startTimer();
   addLog('Conectando-se ao core da API GGreen...', 'info');
-  
+
   try {
     const response = await fetch('/api/v1/health');
     if (response.ok) {
@@ -73,7 +73,7 @@ async function initTerminal() {
   if (DOM.btnEstimateOdds) {
     DOM.btnEstimateOdds.addEventListener('click', calculatePoissonOdds);
   }
-  
+
   // Ativa os botões explicativos (?)
   setupHelpTooltips();
 }
@@ -112,10 +112,10 @@ function setSystemOnline(online) {
  */
 function addLog(message, type = 'info') {
   if (!DOM.consoleLogs) return;
-  
+
   const line = document.createElement('div');
   line.className = 'log-line';
-  
+
   const prefix = document.createElement('span');
   prefix.className = 'text-dim';
   prefix.textContent = `> [${new Date().toTimeString().split(' ')[0]}] `;
@@ -123,14 +123,14 @@ function addLog(message, type = 'info') {
 
   const textNode = document.createElement('span');
   textNode.textContent = message;
-  
+
   if (type === 'success') textNode.className = 'text-success';
   if (type === 'error') textNode.className = 'text-error';
   if (type === 'warning') textNode.className = 'text-warning';
-  
+
   line.appendChild(textNode);
   DOM.consoleLogs.appendChild(line);
-  
+
   // Rola logs para baixo automaticamente
   DOM.consoleLogs.scrollTop = DOM.consoleLogs.scrollHeight;
 }
@@ -188,7 +188,7 @@ function calculateKellyRisk() {
   // Classifica os níveis de risco de acordo com regras-negocio.md
   let riskClass = 'text-safe';
   let evaluationText = '';
-  
+
   if (stakePercent <= 1.5) {
     riskClass = 'text-safe';
     evaluationText = '🟢 APOSTA SEGURA: Alocação confortável ajustada à banca e ao risco.';
@@ -241,9 +241,9 @@ function calculatePoissonOdds() {
 
   // Validação segura de inputs
   if (isNaN(xgHome) || xgHome < 0 ||
-      isNaN(xgaHome) || xgaHome < 0 ||
-      isNaN(xgAway) || xgAway < 0 ||
-      isNaN(xgaAway) || xgaAway < 0) {
+    isNaN(xgaHome) || xgaHome < 0 ||
+    isNaN(xgAway) || xgAway < 0 ||
+    isNaN(xgaAway) || xgaAway < 0) {
     addLog('Erro: Insira valores válidos de xG e xGA (maiores ou iguais a 0).', 'error');
     return;
   }
@@ -252,7 +252,7 @@ function calculatePoissonOdds() {
 
   // Média de gols esperados na partida baseado nas forças ofensivas/defensivas
   // Mandante espera marcar: média do seu ataque vs defesa do visitante
-  const lambda = xgHome; 
+  const lambda = xgHome;
   // Visitante espera marcar: média do seu ataque vs defesa do mandante
   const mu = xgAway;
 
@@ -362,7 +362,7 @@ function setupHelpTooltips() {
   triggers.forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
       event.stopPropagation(); // Evita propagação ao document para não fechar imediatamente
-      
+
       const helpId = trigger.getAttribute('data-help');
       const text = HELP_TEXTS[helpId] || 'Explicação não disponível.';
 
@@ -372,17 +372,17 @@ function setupHelpTooltips() {
 
       // Posicionamento dinâmico
       const rect = trigger.getBoundingClientRect();
-      
+
       // Ajuste de posição absoluto considerando o scroll atual da página
       tooltip.style.left = `${rect.left + window.scrollX - 100}px`;
-      
+
       // Exibe primeiro para podermos calcular a altura renderizada
       const tooltipHeight = tooltip.offsetHeight;
       const topPos = rect.top + window.scrollY - tooltipHeight - 10;
-      
+
       tooltip.style.top = `${topPos}px`;
       tooltip.setAttribute('aria-hidden', 'false');
-      
+
       addLog(`Explicação visual aberta para a métrica: [${helpId}]`, 'info');
     });
   });
