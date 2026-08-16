@@ -31,3 +31,7 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# IA Agent Rules and Skills
+.agents/
+skills/
