@@ -159,8 +159,11 @@
                 </select>
               </div>
               <div class="input-group btn-container-align">
-                <label>&nbsp;</label>
-                <button type="button" class="btn-secondary" id="btn-load-stats" aria-label="Carregar dados estatísticos reais de xG e xGA das equipes">CARREGAR DADOS</button>
+                <label>
+                  Estatísticas Consolidadas
+                  <button type="button" class="help-trigger" id="help-btn-load-stats" data-help="load-stats" aria-label="Ajuda sobre o carregamento automático de estatísticas">?</button>
+                </label>
+                <button type="button" class="btn-secondary" id="btn-load-stats" aria-label="Obter estatísticas consolidadas oficiais de Understat e FBref">OBTER ESTATÍSTICAS OFICIAIS (UNDERSTAT/FBREF)</button>
               </div>
             </div>
 
@@ -219,7 +222,10 @@
 
           <div class="pricing-results" id="pricing-results-container" style="display: none;">
             <div class="divider"></div>
-            <h3 class="results-title">True Odds Calculadas & Probabilidades</h3>
+            <h3 class="results-title">
+              True Odds Calculadas & Probabilidades
+              <button type="button" class="help-trigger" id="help-btn-true-odds" data-help="true-odds" aria-label="Ajuda sobre True Odds Calculadas">?</button>
+            </h3>
             <div class="pricing-grid">
               <div class="pricing-tile">
                 <span class="pricing-label">Vitória Mandante (1)</span>

@@ -372,7 +372,9 @@ const HELP_TEXTS = {
   'xg-home': 'xG Mandante: Expected Goals (Gols Esperados) do time da casa nos últimos jogos. Indica a quantidade e a qualidade das chances de finalização que a equipe criou. Quanto maior o xG, mais perigoso é o ataque do time.',
   'xga-home': 'xGA Mandante: Expected Goals Against (Gols Contra Esperados) do time da casa. Avalia o desempenho defensivo: indica a qualidade das chances que a defesa concede aos adversários. Quanto menor o xGA, mais forte é a defesa.',
   'xg-away': 'xG Visitante: Expected Goals (Gols Esperados) do time de fora. Revela a produtividade ofensiva e a perigosidade de suas finalizações quando joga longe dos seus domínios.',
-  'xga-away': 'xGA Visitante: Expected Goals Against (Gols Contra Esperados) do time de fora. Mede a vulnerabilidade defensiva da equipe quando joga como visitante.'
+  'xga-away': 'xGA Visitante: Expected Goals Against (Gols Contra Esperados) do time de fora. Mede a vulnerabilidade defensiva da equipe quando joga como visitante.',
+  'load-stats': 'Obter Estatísticas Oficiais: Busca e preenche de forma automática e precisa a média real de gols esperados marcados (xG) e sofridos (xGA) das equipes com base nos dados consolidados das últimas temporadas coletados diretamente dos portais Understat e FBref, ponderando o fator de mando de campo de cada time.',
+  'true-odds': 'True Odds (Odds Justas): Cotações puras calculadas matematicamente a partir das probabilidades do modelo estatístico de Poisson, sem margem de lucro embutida. Se a odd justa calculada for menor que a odd da casa, a aposta possui Valor Esperado Positivo (+EV).'
 };
 
 /**
