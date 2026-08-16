@@ -95,6 +95,12 @@ async function initTerminal() {
   if (DOM.selectLeague) {
     DOM.selectLeague.addEventListener('change', filterTeamsByLeague);
   }
+  if (DOM.selectHomeTeam) {
+    DOM.selectHomeTeam.addEventListener('change', handleTeamSelectionChange);
+  }
+  if (DOM.selectAwayTeam) {
+    DOM.selectAwayTeam.addEventListener('change', handleTeamSelectionChange);
+  }
 
   // Inicializa a carga de times
   loadTeamsData();
@@ -605,4 +611,21 @@ function loadSelectedTeamStats() {
   if (DOM.inputXgaAway) DOM.inputXgaAway.value = awayTeam.xgaAway.toFixed(2);
 
   addLog(`Estatísticas do Understat/FBref para [${homeTeam.name}] (C) e [${awayTeam.name}] (F) carregadas nos campos.`, 'success');
+}
+
+/**
+ * Impede a seleção do mesmo time como Mandante e Visitante simultaneamente
+ */
+function handleTeamSelectionChange(event) {
+  if (!DOM.selectHomeTeam || !DOM.selectAwayTeam) return;
+
+  const homeVal = DOM.selectHomeTeam.value;
+  const awayVal = DOM.selectAwayTeam.value;
+
+  if (homeVal && awayVal && homeVal === awayVal) {
+    addLog('Conflito: A mesma equipe não pode ser selecionada como Mandante e Visitante ao mesmo tempo.', 'warning');
+    
+    // Reseta a seleção que causou a colisão para a opção vazia
+    event.target.value = '';
+  }
 }
