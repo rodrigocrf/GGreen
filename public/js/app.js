@@ -40,6 +40,10 @@ const DOM = {
 
   // Tooltip de Ajuda
   helpTooltip: document.getElementById('help-tooltip'),
+
+  // Botões de Limpeza
+  btnClearFinance: document.getElementById('btn-clear-finance'),
+  btnClearPricing: document.getElementById('btn-clear-pricing'),
 };
 
 /**
@@ -72,6 +76,12 @@ async function initTerminal() {
   }
   if (DOM.btnEstimateOdds) {
     DOM.btnEstimateOdds.addEventListener('click', calculatePoissonOdds);
+  }
+  if (DOM.btnClearFinance) {
+    DOM.btnClearFinance.addEventListener('click', clearFinanceFields);
+  }
+  if (DOM.btnClearPricing) {
+    DOM.btnClearPricing.addEventListener('click', clearPricingFields);
   }
 
   // Ativa os botões explicativos (?)
@@ -408,4 +418,43 @@ function setupHelpTooltips() {
     tooltip.style.display = 'none';
     tooltip.setAttribute('aria-hidden', 'true');
   }
+}
+
+/**
+ * Limpa todos os campos da calculadora de gestão de banca e reseta resultados
+ */
+function clearFinanceFields() {
+  if (DOM.inputBank) DOM.inputBank.value = '';
+  if (DOM.inputOdds) DOM.inputOdds.value = '';
+  if (DOM.inputProbability) DOM.inputProbability.value = '';
+  
+  // Reseta fração de Kelly para recomendada (1/4 Kelly)
+  const radioQuarter = document.getElementById('radio-quarter');
+  if (radioQuarter) radioQuarter.checked = true;
+
+  // Reseta os elementos visuais de resultado
+  if (DOM.resultStakePercent) DOM.resultStakePercent.textContent = '0.00%';
+  if (DOM.resultStakeValue) DOM.resultStakeValue.textContent = 'R$ 0,00';
+  if (DOM.resultEvaluation) {
+    DOM.resultEvaluation.textContent = 'Aguardando dados...';
+    DOM.resultEvaluation.className = 'tile-value';
+  }
+  if (DOM.riskBar) DOM.riskBar.style.width = '0%';
+
+  addLog('Painel de gestão de banca e risco redefinido.', 'info');
+}
+
+/**
+ * Limpa todos os campos do estimador de True Odds e oculta o resultado de Poisson
+ */
+function clearPricingFields() {
+  if (DOM.inputXgHome) DOM.inputXgHome.value = '';
+  if (DOM.inputXgaHome) DOM.inputXgaHome.value = '';
+  if (DOM.inputXgAway) DOM.inputXgAway.value = '';
+  if (DOM.inputXgaAway) DOM.inputXgaAway.value = '';
+
+  // Oculta a área de resultados de precificação
+  if (DOM.pricingResults) DOM.pricingResults.style.display = 'none';
+
+  addLog('Campos do estimador de True Odds redefinidos.', 'info');
 }

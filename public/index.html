@@ -87,7 +87,10 @@
               </div>
             </div>
 
-            <button type="button" class="btn-primary" id="btn-calculate-risk">CALCULAR DIRETRIZ FINANCEIRA</button>
+            <div class="button-row">
+              <button type="button" class="btn-primary" id="btn-calculate-risk">CALCULAR DIRETRIZ FINANCEIRA</button>
+              <button type="button" class="btn-secondary" id="btn-clear-finance" aria-label="Limpar campos de finanças">LIMPAR</button>
+            </div>
           </form>
         </div>
       </section>
@@ -172,7 +175,10 @@
             </div>
           </div>
 
-          <button type="button" class="btn-secondary" id="btn-estimate-odds">PRECIFICAR PARTIDA (+EV)</button>
+          <div class="button-row">
+            <button type="button" class="btn-secondary btn-primary-style" id="btn-estimate-odds">PRECIFICAR PARTIDA (+EV)</button>
+            <button type="button" class="btn-secondary" id="btn-clear-pricing" aria-label="Limpar campos de precificação">LIMPAR</button>
+          </div>
 
           <div class="pricing-results" id="pricing-results-container" style="display: none;">
             <div class="divider"></div>

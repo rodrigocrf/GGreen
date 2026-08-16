@@ -373,6 +373,34 @@ button {
   border-color: var(--text-primary);
 }
 
+/* Novo destaque primário estilo botão para a precificação de Poisson */
+.btn-primary-style {
+  background-color: var(--accent-green);
+  color: var(--bg-primary);
+  border: 1px solid var(--accent-green);
+}
+
+.btn-primary-style:hover {
+  background-color: transparent;
+  color: var(--accent-green);
+  box-shadow: 0 0 15px var(--accent-green-glow);
+}
+
+/* Alinhamento dos botões (Calcular/Precificar + Limpar) */
+.button-row {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+@media (max-width: 500px) {
+  .button-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+}
+
 /* 7. ELEMENTO ANCORA DE DIFERENCIAÇÃO: TERMÔMETRO DE RISCO */
 .risk-gauge-container {
   display: flex;
