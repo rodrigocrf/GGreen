@@ -548,8 +548,6 @@ button {
   padding: var(--space-sm) var(--space-md);
   margin-top: var(--space-md);
   font-size: 0.8rem;
-  max-height: 150px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -559,7 +557,7 @@ button {
   color: var(--text-dim);
   font-weight: 700;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 2px;
+  padding-bottom: 4px;
   margin-bottom: 4px;
 }
 
@@ -567,6 +565,8 @@ button {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  max-height: 100px;
+  overflow-y: auto;
 }
 
 .log-line {
