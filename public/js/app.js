@@ -46,6 +46,7 @@ const DOM = {
   btnClearPricing: document.getElementById('btn-clear-pricing'),
 
   // Seletores de Times e Carregamento de Dados
+  selectLeague: document.getElementById('select-league'),
   selectHomeTeam: document.getElementById('select-home-team'),
   selectAwayTeam: document.getElementById('select-away-team'),
   btnLoadStats: document.getElementById('btn-load-stats'),
@@ -90,6 +91,9 @@ async function initTerminal() {
   }
   if (DOM.btnLoadStats) {
     DOM.btnLoadStats.addEventListener('click', loadSelectedTeamStats);
+  }
+  if (DOM.selectLeague) {
+    DOM.selectLeague.addEventListener('change', filterTeamsByLeague);
   }
 
   // Inicializa a carga de times
@@ -467,9 +471,11 @@ function clearPricingFields() {
   if (DOM.inputXgAway) DOM.inputXgAway.value = '';
   if (DOM.inputXgaAway) DOM.inputXgaAway.value = '';
 
-  // Reseta dropdowns
-  if (DOM.selectHomeTeam) DOM.selectHomeTeam.value = '';
-  if (DOM.selectAwayTeam) DOM.selectAwayTeam.value = '';
+  // Reseta dropdown de liga e desabilita dropdowns de times
+  if (DOM.selectLeague) {
+    DOM.selectLeague.value = '';
+    filterTeamsByLeague();
+  }
 
   // Oculta a área de resultados de precificação
   if (DOM.pricingResults) DOM.pricingResults.style.display = 'none';
@@ -491,32 +497,78 @@ async function loadTeamsData() {
     const resData = await response.json();
     if (resData.success && Array.isArray(resData.data)) {
       cacheTeams = resData.data;
-
-      // Limpa dropdowns para evitar duplicidade
-      if (DOM.selectHomeTeam) DOM.selectHomeTeam.innerHTML = '<option value="">-- Selecione o Time --</option>';
-      if (DOM.selectAwayTeam) DOM.selectAwayTeam.innerHTML = '<option value="">-- Selecione o Time --</option>';
-
-      // Ordena os times em ordem alfabética para melhor usabilidade
-      const sortedTeams = [...cacheTeams].sort((a, b) => a.name.localeCompare(b.name));
-
-      sortedTeams.forEach((team) => {
-        const optHome = document.createElement('option');
-        optHome.value = team.id;
-        optHome.textContent = `${team.name}`;
-
-        const optAway = document.createElement('option');
-        optAway.value = team.id;
-        optAway.textContent = `${team.name}`;
-
-        if (DOM.selectHomeTeam) DOM.selectHomeTeam.appendChild(optHome);
-        if (DOM.selectAwayTeam) DOM.selectAwayTeam.appendChild(optAway);
-      });
-
-      addLog(`Carregados ${cacheTeams.length} times das principais ligas e competições.`, 'success');
+      addLog(`Carregados ${cacheTeams.length} times das principais ligas do Express.`, 'success');
     }
   } catch (error) {
     addLog('Falha ao conectar com o serviço de estatísticas de equipes. Modo autônomo ativo.', 'warning');
   }
+}
+
+/**
+ * Filtra os times de acordo com a liga selecionada
+ */
+function filterTeamsByLeague() {
+  if (!DOM.selectLeague || !DOM.selectHomeTeam || !DOM.selectAwayTeam) return;
+
+  const leagueVal = DOM.selectLeague.value;
+
+  if (!leagueVal) {
+    // Se não há liga, desabilita seletores de times e volta estado inicial
+    DOM.selectHomeTeam.disabled = true;
+    DOM.selectAwayTeam.disabled = true;
+    DOM.selectHomeTeam.innerHTML = '<option value="">-- Selecione a Liga Primeiro --</option>';
+    DOM.selectAwayTeam.innerHTML = '<option value="">-- Selecione a Liga Primeiro --</option>';
+    return;
+  }
+
+  // Filtra times pertencentes à liga selecionada
+  let filtered = [];
+  if (leagueVal === 'brasileirao') {
+    filtered = cacheTeams.filter((t) => 
+      t.league.includes('Brasileirão') || 
+      t.league.includes('Lib') || 
+      t.league.includes('Sudamericana')
+    );
+  } else if (leagueVal === 'premier') {
+    filtered = cacheTeams.filter((t) => t.league.includes('Premier League'));
+  } else if (leagueVal === 'laliga') {
+    filtered = cacheTeams.filter((t) => t.league.includes('La Liga'));
+  } else if (leagueVal === 'bundesliga') {
+    filtered = cacheTeams.filter((t) => t.league.includes('Bundesliga'));
+  } else if (leagueVal === 'seriea') {
+    filtered = cacheTeams.filter((t) => t.league.includes('Serie A'));
+  } else if (leagueVal === 'europe') {
+    // Demais ligas continentais como francesa (Ligue 1) e portuguesa (Primeira Liga)
+    filtered = cacheTeams.filter((t) => 
+      t.league.includes('Ligue 1') || 
+      t.league.includes('Primeira Liga')
+    );
+  }
+
+  // Habilita os dropdowns
+  DOM.selectHomeTeam.disabled = false;
+  DOM.selectAwayTeam.disabled = false;
+
+  // Popula com os times correspondentes ordenados alfabeticamente
+  DOM.selectHomeTeam.innerHTML = '<option value="">-- Selecione o Mandante --</option>';
+  DOM.selectAwayTeam.innerHTML = '<option value="">-- Selecione o Visitante --</option>';
+
+  const sortedTeams = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+  
+  sortedTeams.forEach((team) => {
+    const optHome = document.createElement('option');
+    optHome.value = team.id;
+    optHome.textContent = team.name;
+
+    const optAway = document.createElement('option');
+    optAway.value = team.id;
+    optAway.textContent = team.name;
+
+    DOM.selectHomeTeam.appendChild(optHome);
+    DOM.selectAwayTeam.appendChild(optAway);
+  });
+
+  addLog(`Filtro aplicado: ${filtered.length} equipes listadas para a competição selecionada.`, 'info');
 }
 
 /**
@@ -552,5 +604,5 @@ function loadSelectedTeamStats() {
   if (DOM.inputXgAway) DOM.inputXgAway.value = awayTeam.xgAway.toFixed(2);
   if (DOM.inputXgaAway) DOM.inputXgaAway.value = awayTeam.xgaAway.toFixed(2);
 
-  addLog(`Estatísticas do Understat/FBref para [${homeTeam.name}] e [${awayTeam.name}] carregadas nos campos.`, 'success');
+  addLog(`Estatísticas do Understat/FBref para [${homeTeam.name}] (C) e [${awayTeam.name}] (F) carregadas nos campos.`, 'success');
 }

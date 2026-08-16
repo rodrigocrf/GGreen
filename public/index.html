@@ -144,23 +144,40 @@
           <span class="panel-subtitle">Expectativa de Gols Esperados (xG)</span>
         </div>
         <div class="panel-body">
-          <div class="team-selector-row">
-            <div class="input-group">
-              <label for="select-home-team">Mandante</label>
-              <select id="select-home-team" aria-label="Selecionar Time Mandante">
-                <option value="">-- Selecione o Time --</option>
-              </select>
+          <div class="team-selector-container">
+            <div class="selector-row-top">
+              <div class="input-group">
+                <label for="select-league">Liga / Competição</label>
+                <select id="select-league" aria-label="Filtrar por Liga ou Competição">
+                  <option value="">-- Selecione a Liga / Competição --</option>
+                  <option value="brasileirao">Brasileirão (Série A)</option>
+                  <option value="premier">Premier League (Inglaterra)</option>
+                  <option value="laliga">La Liga (Espanha)</option>
+                  <option value="bundesliga">Bundesliga (Alemanha)</option>
+                  <option value="seriea">Serie A (Itália)</option>
+                  <option value="europe">Outras Ligas / Copas (Ligue 1, Primeira Liga, UCL, etc.)</option>
+                </select>
+              </div>
+              <div class="input-group btn-container-align">
+                <label>&nbsp;</label>
+                <button type="button" class="btn-secondary" id="btn-load-stats" aria-label="Carregar dados estatísticos reais de xG e xGA das equipes">CARREGAR DADOS</button>
+              </div>
             </div>
-            <div class="vs-text">VS</div>
-            <div class="input-group">
-              <label for="select-away-team">Visitante</label>
-              <select id="select-away-team" aria-label="Selecionar Time Visitante">
-                <option value="">-- Selecione o Time --</option>
-              </select>
-            </div>
-            <div class="input-group btn-container-align">
-              <label>&nbsp;</label>
-              <button type="button" class="btn-secondary" id="btn-load-stats" aria-label="Carregar dados estatísticos reais de xG e xGA das equipes">CARREGAR DADOS</button>
+
+            <div class="selector-row-bottom">
+              <div class="input-group">
+                <label for="select-home-team">Mandante</label>
+                <select id="select-home-team" aria-label="Selecionar Time Mandante" disabled>
+                  <option value="">-- Selecione a Liga Primeiro --</option>
+                </select>
+              </div>
+              <div class="vs-text">VS</div>
+              <div class="input-group">
+                <label for="select-away-team">Visitante</label>
+                <select id="select-away-team" aria-label="Selecionar Time Visitante" disabled>
+                  <option value="">-- Selecione a Liga Primeiro --</option>
+                </select>
+              </div>
             </div>
           </div>
 
