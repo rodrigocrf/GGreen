@@ -213,6 +213,21 @@
               </label>
               <input type="number" id="input-xga-away" placeholder="Ex: 1.65" min="0" step="0.01">
             </div>
+
+            <div class="input-row market-odds-row">
+              <div class="input-group">
+                <label for="input-market-odd-home">Odd do Mercado Mandante (1)</label>
+                <input type="number" id="input-market-odd-home" placeholder="Ex: 2.10" min="1" step="0.01">
+              </div>
+              <div class="input-group">
+                <label for="input-market-odd-draw">Odd do Mercado Empate (X)</label>
+                <input type="number" id="input-market-odd-draw" placeholder="Ex: 3.40" min="1" step="0.01">
+              </div>
+              <div class="input-group">
+                <label for="input-market-odd-away">Odd do Mercado Visitante (2)</label>
+                <input type="number" id="input-market-odd-away" placeholder="Ex: 3.80" min="1" step="0.01">
+              </div>
+            </div>
           </div>
 
           <div class="button-row">
@@ -241,6 +256,18 @@
                 <span class="pricing-label">Vitória Visitante (2)</span>
                 <span class="pricing-prob" id="prob-away">0%</span>
                 <span class="pricing-odd" id="odd-away">Odd: 0.00</span>
+              </div>
+            </div>
+
+            <div class="ev-opportunity-card">
+              <div class="ev-opportunity-header">
+                <h4>
+                  Diretriz de Oportunidades (+EV)
+                  <button type="button" class="help-trigger" id="help-btn-ev" data-help="ev-value" aria-label="Ajuda sobre Valor Esperado Positivo (+EV)">?</button>
+                </h4>
+              </div>
+              <div class="ev-opportunity-body" id="ev-opportunity-text">
+                💡 DICA: Insira as Odds do Mercado acima para que o sistema identifique automaticamente se há Valor Esperado Positivo (+EV) nas vias.
               </div>
             </div>
           </div>

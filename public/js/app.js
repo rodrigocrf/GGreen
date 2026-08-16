@@ -50,6 +50,12 @@ const DOM = {
   selectHomeTeam: document.getElementById('select-home-team'),
   selectAwayTeam: document.getElementById('select-away-team'),
   btnLoadStats: document.getElementById('btn-load-stats'),
+
+  // Odds de Mercado e Oportunidades +EV
+  inputMarketOddHome: document.getElementById('input-market-odd-home'),
+  inputMarketOddDraw: document.getElementById('input-market-odd-draw'),
+  inputMarketOddAway: document.getElementById('input-market-odd-away'),
+  evOpportunityText: document.getElementById('ev-opportunity-text'),
 };
 
 /**
@@ -336,6 +342,50 @@ function calculatePoissonOdds() {
   DOM.probAway.textContent = `${(probWinAway * 100).toFixed(1)}%`;
   DOM.oddAway.textContent = `Odd: ${oddA.toFixed(2)}`;
 
+  // Resgata as odds do mercado (casa de apostas)
+  const marketH = DOM.inputMarketOddHome ? parseFloat(DOM.inputMarketOddHome.value) : NaN;
+  const marketD = DOM.inputMarketOddDraw ? parseFloat(DOM.inputMarketOddDraw.value) : NaN;
+  const marketA = DOM.inputMarketOddAway ? parseFloat(DOM.inputMarketOddAway.value) : NaN;
+
+  // Atualiza a Diretriz de Oportunidades (+EV) se houver odds de mercado
+  if (DOM.evOpportunityText) {
+    if (isNaN(marketH) && isNaN(marketD) && isNaN(marketA)) {
+      DOM.evOpportunityText.innerHTML = '💡 DICA: Insira as Odds do Mercado acima para que o sistema identifique automaticamente se há Valor Esperado Positivo (+EV) nas vias.';
+    } else {
+      const opportunities = [];
+
+      // Validamos o EV do Mandante (1)
+      if (!isNaN(marketH) && marketH > 1) {
+        const evH = (marketH * probWinHome) - 1;
+        if (evH > 0) {
+          opportunities.push(`• <span class="text-ev-success">🟢 MANDANTE (+EV)</span>: Odd Mercado <strong>${marketH.toFixed(2)}</strong> vs Odd Justa <strong>${oddH.toFixed(2)}</strong> (Valor Esperado: <strong class="text-ev-success">+${(evH * 100).toFixed(1)}%</strong>)`);
+        }
+      }
+
+      // Validamos o EV do Empate (X)
+      if (!isNaN(marketD) && marketD > 1) {
+        const evD = (marketD * probDraw) - 1;
+        if (evD > 0) {
+          opportunities.push(`• <span class="text-ev-success">🟢 EMPATE (+EV)</span>: Odd Mercado <strong>${marketD.toFixed(2)}</strong> vs Odd Justa <strong>${oddD.toFixed(2)}</strong> (Valor Esperado: <strong class="text-ev-success">+${(evD * 100).toFixed(1)}%</strong>)`);
+        }
+      }
+
+      // Validamos o EV do Visitante (2)
+      if (!isNaN(marketA) && marketA > 1) {
+        const evA = (marketA * probWinAway) - 1;
+        if (evA > 0) {
+          opportunities.push(`• <span class="text-ev-success">🟢 VISITANTE (+EV)</span>: Odd Mercado <strong>${marketA.toFixed(2)}</strong> vs Odd Justa <strong>${oddA.toFixed(2)}</strong> (Valor Esperado: <strong class="text-ev-success">+${(evA * 100).toFixed(1)}%</strong>)`);
+        }
+      }
+
+      if (opportunities.length > 0) {
+        DOM.evOpportunityText.innerHTML = 'OPORTUNIDADES DE INVESTIMENTO DETECTADAS:<br>' + opportunities.join('<br>');
+      } else {
+        DOM.evOpportunityText.innerHTML = '<span class="text-ev-danger">🔴 NENHUMA OPORTUNIDADE (+EV) DETECTADA</span>: As odds oferecidas pelo mercado estão ajustadas ou abaixo das True Odds calculadas pelo modelo de Poisson. Não realize nenhuma entrada neste confronto.';
+      }
+    }
+  }
+
   // Exibe a seção de resultados
   DOM.pricingResults.style.display = 'block';
 
@@ -380,7 +430,8 @@ const HELP_TEXTS = {
   'xg-away': 'xG Visitante: Expected Goals (Gols Esperados) do time de fora. Revela a produtividade ofensiva e a perigosidade de suas finalizações quando joga longe dos seus domínios.',
   'xga-away': 'xGA Visitante: Expected Goals Against (Gols Contra Esperados) do time de fora. Mede a vulnerabilidade defensiva da equipe quando joga como visitante.',
   'load-stats': 'Obter Estatísticas Oficiais: Busca e preenche de forma automática e precisa a média real de gols esperados marcados (xG) e sofridos (xGA) das equipes com base nos dados consolidados das últimas temporadas coletados diretamente dos portais Understat e FBref, ponderando o fator de mando de campo de cada time.',
-  'true-odds': 'True Odds (Odds Justas): Cotações puras calculadas matematicamente a partir das probabilidades do modelo estatístico de Poisson, sem margem de lucro embutida. Se a odd justa calculada for menor que a odd da casa, a aposta possui Valor Esperado Positivo (+EV).'
+  'true-odds': 'True Odds (Odds Justas): Cotações puras calculadas matematicamente a partir das probabilidades do modelo estatístico de Poisson, sem margem de lucro embutida. Se a odd justa calculada for menor que a odd da casa, a aposta possui Valor Esperado Positivo (+EV).',
+  'ev-value': 'Valor Esperado Positivo (+EV): Ocorre quando a probabilidade real de um resultado (calculada pelo modelo de Poisson) é maior do que a probabilidade implícita na odd do mercado oferecida pela casa de apostas. Matematicamente: EV = (Odd do Mercado * Probabilidade Poisson) - 1. Resultados maiores que zero indicam lucro estatístico de longo prazo.'
 };
 
 /**
@@ -479,6 +530,11 @@ function clearPricingFields() {
   if (DOM.inputXgAway) DOM.inputXgAway.value = '';
   if (DOM.inputXgaAway) DOM.inputXgaAway.value = '';
 
+  // Reseta odds de mercado
+  if (DOM.inputMarketOddHome) DOM.inputMarketOddHome.value = '';
+  if (DOM.inputMarketOddDraw) DOM.inputMarketOddDraw.value = '';
+  if (DOM.inputMarketOddAway) DOM.inputMarketOddAway.value = '';
+
   // Reseta dropdown de liga e desabilita dropdowns de times
   if (DOM.selectLeague) {
     DOM.selectLeague.value = '';
@@ -487,6 +543,9 @@ function clearPricingFields() {
 
   // Oculta a área de resultados de precificação
   if (DOM.pricingResults) DOM.pricingResults.style.display = 'none';
+  if (DOM.evOpportunityText) {
+    DOM.evOpportunityText.innerHTML = '💡 DICA: Insira as Odds do Mercado acima para que o sistema identifique automaticamente se há Valor Esperado Positivo (+EV) nas vias.';
+  }
 
   addLog('Campos do estimador de True Odds redefinidos.', 'info');
 }
