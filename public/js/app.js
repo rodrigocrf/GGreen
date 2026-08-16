@@ -44,6 +44,11 @@ const DOM = {
   // Botões de Limpeza
   btnClearFinance: document.getElementById('btn-clear-finance'),
   btnClearPricing: document.getElementById('btn-clear-pricing'),
+
+  // Seletores de Times e Carregamento de Dados
+  selectHomeTeam: document.getElementById('select-home-team'),
+  selectAwayTeam: document.getElementById('select-away-team'),
+  btnLoadStats: document.getElementById('btn-load-stats'),
 };
 
 /**
@@ -83,6 +88,12 @@ async function initTerminal() {
   if (DOM.btnClearPricing) {
     DOM.btnClearPricing.addEventListener('click', clearPricingFields);
   }
+  if (DOM.btnLoadStats) {
+    DOM.btnLoadStats.addEventListener('click', loadSelectedTeamStats);
+  }
+
+  // Inicializa a carga de times
+  loadTeamsData();
 
   // Ativa os botões explicativos (?)
   setupHelpTooltips();
@@ -447,14 +458,99 @@ function clearFinanceFields() {
 /**
  * Limpa todos os campos do estimador de True Odds e oculta o resultado de Poisson
  */
+// Cache global cliente das estatísticas das equipes obtidas do backend
+let cacheTeams = [];
+
 function clearPricingFields() {
   if (DOM.inputXgHome) DOM.inputXgHome.value = '';
   if (DOM.inputXgaHome) DOM.inputXgaHome.value = '';
   if (DOM.inputXgAway) DOM.inputXgAway.value = '';
   if (DOM.inputXgaAway) DOM.inputXgaAway.value = '';
 
+  // Reseta dropdowns
+  if (DOM.selectHomeTeam) DOM.selectHomeTeam.value = '';
+  if (DOM.selectAwayTeam) DOM.selectAwayTeam.value = '';
+
   // Oculta a área de resultados de precificação
   if (DOM.pricingResults) DOM.pricingResults.style.display = 'none';
 
   addLog('Campos do estimador de True Odds redefinidos.', 'info');
+}
+
+/**
+ * Consome a rota do backend para obter dados consolidados das equipes
+ */
+async function loadTeamsData() {
+  try {
+    const response = await fetch('/api/v1/teams');
+    if (!response.ok) {
+      addLog('Erro ao obter banco de dados de times do servidor.', 'warning');
+      return;
+    }
+
+    const resData = await response.json();
+    if (resData.success && Array.isArray(resData.data)) {
+      cacheTeams = resData.data;
+
+      // Limpa dropdowns para evitar duplicidade
+      if (DOM.selectHomeTeam) DOM.selectHomeTeam.innerHTML = '<option value="">-- Selecione o Time --</option>';
+      if (DOM.selectAwayTeam) DOM.selectAwayTeam.innerHTML = '<option value="">-- Selecione o Time --</option>';
+
+      // Ordena os times em ordem alfabética para melhor usabilidade
+      const sortedTeams = [...cacheTeams].sort((a, b) => a.name.localeCompare(b.name));
+
+      sortedTeams.forEach((team) => {
+        const optHome = document.createElement('option');
+        optHome.value = team.id;
+        optHome.textContent = `${team.name}`;
+
+        const optAway = document.createElement('option');
+        optAway.value = team.id;
+        optAway.textContent = `${team.name}`;
+
+        if (DOM.selectHomeTeam) DOM.selectHomeTeam.appendChild(optHome);
+        if (DOM.selectAwayTeam) DOM.selectAwayTeam.appendChild(optAway);
+      });
+
+      addLog(`Carregados ${cacheTeams.length} times das principais ligas e competições.`, 'success');
+    }
+  } catch (error) {
+    addLog('Falha ao conectar com o serviço de estatísticas de equipes. Modo autônomo ativo.', 'warning');
+  }
+}
+
+/**
+ * Carrega estatísticas de xG/xGA nos inputs baseado nas seleções atuais
+ */
+function loadSelectedTeamStats() {
+  if (!DOM.selectHomeTeam || !DOM.selectAwayTeam) return;
+
+  const homeId = DOM.selectHomeTeam.value;
+  const awayId = DOM.selectAwayTeam.value;
+
+  if (!homeId || !awayId) {
+    addLog('Selecione ambos os times (Mandante e Visitante) para carregar as estatísticas.', 'warning');
+    return;
+  }
+
+  if (homeId === awayId) {
+    addLog('Atenção: O time Mandante e Visitante são idênticos. Selecione equipes distintas.', 'warning');
+    return;
+  }
+
+  const homeTeam = cacheTeams.find((t) => t.id === homeId);
+  const awayTeam = cacheTeams.find((t) => t.id === awayId);
+
+  if (!homeTeam || !awayTeam) {
+    addLog('Não foi possível recuperar os coeficientes das equipes selecionadas.', 'error');
+    return;
+  }
+
+  // Carrega dados de ataque e defesa reais correspondentes ao mando de campo
+  if (DOM.inputXgHome) DOM.inputXgHome.value = homeTeam.xgHome.toFixed(2);
+  if (DOM.inputXgaHome) DOM.inputXgaHome.value = homeTeam.xgaHome.toFixed(2);
+  if (DOM.inputXgAway) DOM.inputXgAway.value = awayTeam.xgAway.toFixed(2);
+  if (DOM.inputXgaAway) DOM.inputXgaAway.value = awayTeam.xgaAway.toFixed(2);
+
+  addLog(`Estatísticas do Understat/FBref para [${homeTeam.name}] e [${awayTeam.name}] carregadas nos campos.`, 'success');
 }

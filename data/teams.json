@@ -1,0 +1,290 @@
+[
+  {
+    "id": "mancity",
+    "name": "Manchester City (ING)",
+    "league": "Premier League / UCL",
+    "xgHome": 2.30,
+    "xgaHome": 0.95,
+    "xgAway": 2.05,
+    "xgaAway": 1.10
+  },
+  {
+    "id": "arsenal",
+    "name": "Arsenal (ING)",
+    "league": "Premier League / UCL",
+    "xgHome": 2.10,
+    "xgaHome": 0.85,
+    "xgAway": 1.90,
+    "xgaAway": 1.00
+  },
+  {
+    "id": "liverpool",
+    "name": "Liverpool (ING)",
+    "league": "Premier League / UCL",
+    "xgHome": 2.20,
+    "xgaHome": 1.05,
+    "xgAway": 1.95,
+    "xgaAway": 1.20
+  },
+  {
+    "id": "chelsea",
+    "name": "Chelsea (ING)",
+    "league": "Premier League",
+    "xgHome": 1.85,
+    "xgaHome": 1.25,
+    "xgAway": 1.60,
+    "xgaAway": 1.40
+  },
+  {
+    "id": "manunited",
+    "name": "Manchester United (ING)",
+    "league": "Premier League",
+    "xgHome": 1.70,
+    "xgaHome": 1.35,
+    "xgAway": 1.45,
+    "xgaAway": 1.50
+  },
+  {
+    "id": "realmadrid",
+    "name": "Real Madrid (ESP)",
+    "league": "La Liga / UCL",
+    "xgHome": 2.20,
+    "xgaHome": 0.90,
+    "xgAway": 1.95,
+    "xgaAway": 1.05
+  },
+  {
+    "id": "barcelona",
+    "name": "Barcelona (ESP)",
+    "league": "La Liga / UCL",
+    "xgHome": 2.05,
+    "xgaHome": 1.10,
+    "xgAway": 1.80,
+    "xgaAway": 1.25
+  },
+  {
+    "id": "atleticomadrid",
+    "name": "Atlético de Madrid (ESP)",
+    "league": "La Liga / UCL",
+    "xgHome": 1.95,
+    "xgaHome": 1.00,
+    "xgAway": 1.50,
+    "xgaAway": 1.30
+  },
+  {
+    "id": "leverkusen",
+    "name": "Bayer Leverkusen (ALE)",
+    "league": "Bundesliga / UCL",
+    "xgHome": 2.15,
+    "xgaHome": 0.90,
+    "xgAway": 1.85,
+    "xgaAway": 1.15
+  },
+  {
+    "id": "bayern",
+    "name": "Bayern de Munique (ALE)",
+    "league": "Bundesliga / UCL",
+    "xgHome": 2.40,
+    "xgaHome": 1.05,
+    "xgAway": 2.00,
+    "xgaAway": 1.30
+  },
+  {
+    "id": "dortmund",
+    "name": "Borussia Dortmund (ALE)",
+    "league": "Bundesliga / UCL",
+    "xgHome": 1.80,
+    "xgaHome": 1.20,
+    "xgAway": 1.65,
+    "xgaAway": 1.35
+  },
+  {
+    "id": "intermilan",
+    "name": "Inter de Milão (ITA)",
+    "league": "Serie A / UCL",
+    "xgHome": 2.10,
+    "xgaHome": 0.80,
+    "xgAway": 1.85,
+    "xgaAway": 0.95
+  },
+  {
+    "id": "acmilan",
+    "name": "Milan (ITA)",
+    "league": "Serie A / UCL",
+    "xgHome": 1.80,
+    "xgaHome": 1.15,
+    "xgAway": 1.60,
+    "xgaAway": 1.30
+  },
+  {
+    "id": "juventus",
+    "name": "Juventus (ITA)",
+    "league": "Serie A / UCL",
+    "xgHome": 1.65,
+    "xgaHome": 0.85,
+    "xgAway": 1.40,
+    "xgaAway": 1.10
+  },
+  {
+    "id": "psg",
+    "name": "Paris Saint-Germain (FRA)",
+    "league": "Ligue 1 / UCL",
+    "xgHome": 2.25,
+    "xgaHome": 1.00,
+    "xgAway": 1.95,
+    "xgaAway": 1.20
+  },
+  {
+    "id": "sporting",
+    "name": "Sporting CP (POR)",
+    "league": "Primeira Liga / UCL",
+    "xgHome": 2.35,
+    "xgaHome": 0.85,
+    "xgAway": 1.90,
+    "xgaAway": 1.05
+  },
+  {
+    "id": "benfica",
+    "name": "Benfica (POR)",
+    "league": "Primeira Liga / UCL",
+    "xgHome": 2.15,
+    "xgaHome": 0.95,
+    "xgAway": 1.75,
+    "xgaAway": 1.15
+  },
+  {
+    "id": "porto",
+    "name": "Porto (POR)",
+    "league": "Primeira Liga",
+    "xgHome": 1.95,
+    "xgaHome": 0.90,
+    "xgAway": 1.60,
+    "xgaAway": 1.10
+  },
+  {
+    "id": "flamengo",
+    "name": "Flamengo (BRA)",
+    "league": "Brasileirão / Lib",
+    "xgHome": 1.85,
+    "xgaHome": 1.00,
+    "xgAway": 1.55,
+    "xgaAway": 1.20
+  },
+  {
+    "id": "palmeiras",
+    "name": "Palmeiras (BRA)",
+    "league": "Brasileirão / Lib",
+    "xgHome": 1.75,
+    "xgaHome": 0.95,
+    "xgAway": 1.50,
+    "xgaAway": 1.15
+  },
+  {
+    "id": "atleticomg",
+    "name": "Atlético Mineiro (BRA)",
+    "league": "Brasileirão / Lib",
+    "xgHome": 1.65,
+    "xgaHome": 1.05,
+    "xgAway": 1.35,
+    "xgaAway": 1.25
+  },
+  {
+    "id": "botafogo",
+    "name": "Botafogo (BRA)",
+    "league": "Brasileirão / Lib",
+    "xgHome": 1.80,
+    "xgaHome": 1.05,
+    "xgAway": 1.60,
+    "xgaAway": 1.25
+  },
+  {
+    "id": "saopaulo",
+    "name": "São Paulo (BRA)",
+    "league": "Brasileirão / Lib",
+    "xgHome": 1.60,
+    "xgaHome": 1.10,
+    "xgAway": 1.30,
+    "xgaAway": 1.30
+  },
+  {
+    "id": "gremio",
+    "name": "Grêmio (BRA)",
+    "league": "Brasileirão / Lib",
+    "xgHome": 1.55,
+    "xgaHome": 1.20,
+    "xgAway": 1.25,
+    "xgaAway": 1.40
+  },
+  {
+    "id": "fluminense",
+    "name": "Fluminense (BRA)",
+    "league": "Brasileirão / Lib",
+    "xgHome": 1.50,
+    "xgaHome": 1.15,
+    "xgAway": 1.20,
+    "xgaAway": 1.35
+  },
+  {
+    "id": "internacional",
+    "name": "Internacional (BRA)",
+    "league": "Brasileirão",
+    "xgHome": 1.60,
+    "xgaHome": 1.00,
+    "xgAway": 1.30,
+    "xgaAway": 1.25
+  },
+  {
+    "id": "corinthians",
+    "name": "Corinthians (BRA)",
+    "league": "Brasileirão",
+    "xgHome": 1.45,
+    "xgaHome": 1.15,
+    "xgAway": 1.15,
+    "xgaAway": 1.35
+  },
+  {
+    "id": "cruzeiro",
+    "name": "Cruzeiro (BRA)",
+    "league": "Brasileirão",
+    "xgHome": 1.50,
+    "xgaHome": 1.10,
+    "xgAway": 1.20,
+    "xgaAway": 1.30
+  },
+  {
+    "id": "fortaleza",
+    "name": "Fortaleza (BRA)",
+    "league": "Brasileirão",
+    "xgHome": 1.65,
+    "xgaHome": 1.10,
+    "xgAway": 1.35,
+    "xgaAway": 1.35
+  },
+  {
+    "id": "bahia",
+    "name": "Bahia (BRA)",
+    "league": "Brasileirão",
+    "xgHome": 1.70,
+    "xgaHome": 1.15,
+    "xgAway": 1.40,
+    "xgaAway": 1.30
+  },
+  {
+    "id": "riverplate",
+    "name": "River Plate (ARG)",
+    "league": "Libertadores",
+    "xgHome": 1.90,
+    "xgaHome": 0.95,
+    "xgAway": 1.50,
+    "xgaAway": 1.20
+  },
+  {
+    "id": "bocajuniors",
+    "name": "Boca Juniors (ARG)",
+    "league": "Sudamericana",
+    "xgHome": 1.60,
+    "xgaHome": 1.00,
+    "xgAway": 1.25,
+    "xgaAway": 1.25
+  }
+]

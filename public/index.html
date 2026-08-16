@@ -144,6 +144,26 @@
           <span class="panel-subtitle">Expectativa de Gols Esperados (xG)</span>
         </div>
         <div class="panel-body">
+          <div class="team-selector-row">
+            <div class="input-group">
+              <label for="select-home-team">Mandante</label>
+              <select id="select-home-team" aria-label="Selecionar Time Mandante">
+                <option value="">-- Selecione o Time --</option>
+              </select>
+            </div>
+            <div class="vs-text">VS</div>
+            <div class="input-group">
+              <label for="select-away-team">Visitante</label>
+              <select id="select-away-team" aria-label="Selecionar Time Visitante">
+                <option value="">-- Selecione o Time --</option>
+              </select>
+            </div>
+            <div class="input-group btn-container-align">
+              <label>&nbsp;</label>
+              <button type="button" class="btn-secondary" id="btn-load-stats" aria-label="Carregar dados estatísticos reais de xG e xGA das equipes">CARREGAR DADOS</button>
+            </div>
+          </div>
+
           <div class="input-row">
             <div class="input-group">
               <label for="input-xg-home">

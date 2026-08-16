@@ -6,6 +6,7 @@ import { rateLimit } from 'express-rate-limit';
 import { env } from './config/env';
 import { errorMiddleware } from './middlewares/error.middleware';
 import { HealthController } from './controllers/health.controller';
+import { TeamsController } from './controllers/teams.controller';
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(limiter);
 // 5. Definição das rotas da API
 app.get('/health', HealthController.check);
 app.get('/api/v1/health', HealthController.check);
+app.get('/api/v1/teams', TeamsController.getAll);
 
 // 6. Tratamento global de erros (deve ser o último a ser registrado)
 app.use(errorMiddleware);
