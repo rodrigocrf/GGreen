@@ -56,6 +56,15 @@ const DOM = {
   inputMarketOddDraw: document.getElementById('input-market-odd-draw'),
   inputMarketOddAway: document.getElementById('input-market-odd-away'),
   evOpportunityText: document.getElementById('ev-opportunity-text'),
+
+  // Painel Informativo Flashscore
+  flashscorePanel: document.getElementById('flashscore-panel'),
+  flashscoreHomeName: document.getElementById('flashscore-home-name'),
+  flashscoreHomeForm: document.getElementById('flashscore-home-form'),
+  flashscoreHomeAbsences: document.getElementById('flashscore-home-absences'),
+  flashscoreAwayName: document.getElementById('flashscore-away-name'),
+  flashscoreAwayForm: document.getElementById('flashscore-away-form'),
+  flashscoreAwayAbsences: document.getElementById('flashscore-away-absences'),
 };
 
 /**
@@ -429,7 +438,7 @@ const HELP_TEXTS = {
   'xga-home': 'xGA Mandante: Expected Goals Against (Gols Contra Esperados) do time da casa. Avalia o desempenho defensivo: indica a qualidade das chances que a defesa concede aos adversários. Quanto menor o xGA, mais forte é a defesa.',
   'xg-away': 'xG Visitante: Expected Goals (Gols Esperados) do time de fora. Revela a produtividade ofensiva e a perigosidade de suas finalizações quando joga longe dos seus domínios.',
   'xga-away': 'xGA Visitante: Expected Goals Against (Gols Contra Esperados) do time de fora. Mede a vulnerabilidade defensiva da equipe quando joga como visitante.',
-  'load-stats': 'Obter Estatísticas Oficiais: Busca e preenche de forma automática e precisa a média real de gols esperados marcados (xG) e sofridos (xGA) das equipes com base nos dados consolidados das últimas temporadas coletados diretamente dos portais Understat e FBref, ponderando o fator de mando de campo de cada time.',
+  'load-stats': 'Obter Estatísticas Oficiais: Preenche automaticamente a média de gols esperados (xG/xGA) extraídos de Understat e FBref, além de sincronizar dinamicamente o feed de desfalques importantes e forma recente obtidos diretamente do Flashscore para contextualizar a análise.',
   'true-odds': 'True Odds (Odds Justas): Cotações puras calculadas matematicamente a partir das probabilidades do modelo estatístico de Poisson, sem margem de lucro embutida. Se a odd justa calculada for menor que a odd da casa, a aposta possui Valor Esperado Positivo (+EV).',
   'ev-value': 'Valor Esperado Positivo (+EV): Ocorre quando a probabilidade real de um resultado (calculada pelo modelo de Poisson) é maior do que a probabilidade implícita na odd do mercado oferecida pela casa de apostas. Matematicamente: EV = (Odd do Mercado * Probabilidade Poisson) - 1. Resultados maiores que zero indicam lucro estatístico de longo prazo.'
 };
@@ -546,6 +555,7 @@ function clearPricingFields() {
   if (DOM.evOpportunityText) {
     DOM.evOpportunityText.innerHTML = '💡 DICA: Insira as Odds do Mercado acima para que o sistema identifique automaticamente se há Valor Esperado Positivo (+EV) nas vias.';
   }
+  if (DOM.flashscorePanel) DOM.flashscorePanel.style.display = 'none';
 
   addLog('Campos do estimador de True Odds redefinidos.', 'info');
 }
@@ -687,4 +697,43 @@ function handleTeamSelectionChange(event) {
     // Reseta a seleção que causou a colisão para a opção vazia
     event.target.value = '';
   }
+
+  // Sincroniza o feed tático e desfalques do Flashscore
+  updateFlashscorePanel();
+}
+
+/**
+ * Atualiza o painel informativo com dados de desfalques e forma do Flashscore
+ */
+function updateFlashscorePanel() {
+  if (!DOM.selectHomeTeam || !DOM.selectAwayTeam || !DOM.flashscorePanel) return;
+
+  const homeId = DOM.selectHomeTeam.value;
+  const awayId = DOM.selectAwayTeam.value;
+
+  if (!homeId || !awayId || homeId === awayId) {
+    DOM.flashscorePanel.style.display = 'none';
+    return;
+  }
+
+  const homeTeam = cacheTeams.find((t) => t.id === homeId);
+  const awayTeam = cacheTeams.find((t) => t.id === awayId);
+
+  if (!homeTeam || !awayTeam) {
+    DOM.flashscorePanel.style.display = 'none';
+    return;
+  }
+
+  // Renderiza com segurança usando textContent
+  if (DOM.flashscoreHomeName) DOM.flashscoreHomeName.textContent = homeTeam.name;
+  if (DOM.flashscoreHomeForm) DOM.flashscoreHomeForm.textContent = homeTeam.form;
+  if (DOM.flashscoreHomeAbsences) DOM.flashscoreHomeAbsences.textContent = homeTeam.absences;
+
+  if (DOM.flashscoreAwayName) DOM.flashscoreAwayName.textContent = awayTeam.name;
+  if (DOM.flashscoreAwayForm) DOM.flashscoreAwayForm.textContent = awayTeam.form;
+  if (DOM.flashscoreAwayAbsences) DOM.flashscoreAwayAbsences.textContent = awayTeam.absences;
+
+  DOM.flashscorePanel.style.display = 'block';
+
+  addLog(`Informativo tático/desfalques de [${homeTeam.name}] e [${awayTeam.name}] carregado via feed Flashscore.`, 'info');
 }

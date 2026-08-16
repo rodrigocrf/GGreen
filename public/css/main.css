@@ -859,3 +859,73 @@ button {
   color: var(--accent-warning);
 }
 
+/* 14. PAINEL INFORMATIVO FLASHSCORE (DESFALQUES E FORMA) */
+.flashscore-panel {
+  background-color: var(--bg-tertiary);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-sm) var(--space-md);
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.flashscore-header {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-green);
+  text-shadow: 0 0 3px var(--accent-green-glow);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xs);
+  letter-spacing: 1px;
+}
+
+.flashscore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+@media (max-width: 500px) {
+  .flashscore-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+}
+
+.flashscore-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.flashscore-team-name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+  letter-spacing: 1px;
+}
+
+.flashscore-metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  gap: var(--space-sm);
+  margin: 2px 0;
+}
+
+.flashscore-label {
+  color: var(--text-dim);
+}
+
+.flashscore-value {
+  color: var(--text-secondary);
+  text-align: right;
+}
+

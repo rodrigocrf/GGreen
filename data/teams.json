@@ -3,28 +3,34 @@
     "id": "mancity",
     "name": "Manchester City (ING)",
     "league": "Premier League / UCL",
-    "xgHome": 2.30,
+    "xgHome": 2.3,
     "xgaHome": 0.95,
     "xgAway": 2.05,
-    "xgaAway": 1.10
+    "xgaAway": 1.1,
+    "form": "V-V-E-V-D",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "arsenal",
     "name": "Arsenal (ING)",
     "league": "Premier League / UCL",
-    "xgHome": 2.10,
+    "xgHome": 2.1,
     "xgaHome": 0.85,
-    "xgAway": 1.90,
-    "xgaAway": 1.00
+    "xgAway": 1.9,
+    "xgaAway": 1,
+    "form": "V-E-V-V-E",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "liverpool",
     "name": "Liverpool (ING)",
     "league": "Premier League / UCL",
-    "xgHome": 2.20,
+    "xgHome": 2.2,
     "xgaHome": 1.05,
     "xgAway": 1.95,
-    "xgaAway": 1.20
+    "xgaAway": 1.2,
+    "form": "E-D-V-V-V",
+    "absences": "Artilheiro suspenso por acúmulo de cartões amarelos."
   },
   {
     "id": "chelsea",
@@ -32,89 +38,109 @@
     "league": "Premier League",
     "xgHome": 1.85,
     "xgaHome": 1.25,
-    "xgAway": 1.60,
-    "xgaAway": 1.40
+    "xgAway": 1.6,
+    "xgaAway": 1.4,
+    "form": "V-V-V-E-D",
+    "absences": "Zagueiro titular lesionado (panturrilha)."
   },
   {
     "id": "manunited",
     "name": "Manchester United (ING)",
     "league": "Premier League",
-    "xgHome": 1.70,
+    "xgHome": 1.7,
     "xgaHome": 1.35,
     "xgAway": 1.45,
-    "xgaAway": 1.50
+    "xgaAway": 1.5,
+    "form": "D-V-E-V-V",
+    "absences": "Goleiro principal poupado devido a fadiga muscular."
   },
   {
     "id": "realmadrid",
     "name": "Real Madrid (ESP)",
     "league": "La Liga / UCL",
-    "xgHome": 2.20,
-    "xgaHome": 0.90,
+    "xgHome": 2.2,
+    "xgaHome": 0.9,
     "xgAway": 1.95,
-    "xgaAway": 1.05
+    "xgaAway": 1.05,
+    "form": "E-E-V-V-D",
+    "absences": "Meia de criação lesionado (estiramento de coxa)."
   },
   {
     "id": "barcelona",
     "name": "Barcelona (ESP)",
     "league": "La Liga / UCL",
     "xgHome": 2.05,
-    "xgaHome": 1.10,
-    "xgAway": 1.80,
-    "xgaAway": 1.25
+    "xgaHome": 1.1,
+    "xgAway": 1.8,
+    "xgaAway": 1.25,
+    "form": "V-D-V-V-E",
+    "absences": "Lateral esquerdo titular suspenso."
   },
   {
     "id": "atleticomadrid",
     "name": "Atlético de Madrid (ESP)",
     "league": "La Liga / UCL",
     "xgHome": 1.95,
-    "xgaHome": 1.00,
-    "xgAway": 1.50,
-    "xgaAway": 1.30
+    "xgaHome": 1,
+    "xgAway": 1.5,
+    "xgaAway": 1.3,
+    "form": "E-D-D-V-V",
+    "absences": "Dois jogadores reservas em transição física."
   },
   {
     "id": "leverkusen",
     "name": "Bayer Leverkusen (ALE)",
     "league": "Bundesliga / UCL",
     "xgHome": 2.15,
-    "xgaHome": 0.90,
+    "xgaHome": 0.9,
     "xgAway": 1.85,
-    "xgaAway": 1.15
+    "xgaAway": 1.15,
+    "form": "V-V-E-V-D",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "bayern",
     "name": "Bayern de Munique (ALE)",
     "league": "Bundesliga / UCL",
-    "xgHome": 2.40,
+    "xgHome": 2.4,
     "xgaHome": 1.05,
-    "xgAway": 2.00,
-    "xgaAway": 1.30
+    "xgAway": 2,
+    "xgaAway": 1.3,
+    "form": "V-E-V-V-E",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "dortmund",
     "name": "Borussia Dortmund (ALE)",
     "league": "Bundesliga / UCL",
-    "xgHome": 1.80,
-    "xgaHome": 1.20,
+    "xgHome": 1.8,
+    "xgaHome": 1.2,
     "xgAway": 1.65,
-    "xgaAway": 1.35
+    "xgaAway": 1.35,
+    "form": "E-D-V-V-V",
+    "absences": "Artilheiro suspenso por acúmulo de cartões amarelos."
   },
   {
     "id": "intermilan",
     "name": "Inter de Milão (ITA)",
     "league": "Serie A / UCL",
-    "xgHome": 2.10,
-    "xgaHome": 0.80,
+    "xgHome": 2.1,
+    "xgaHome": 0.8,
     "xgAway": 1.85,
-    "xgaAway": 0.95
+    "xgaAway": 0.95,
+    "form": "V-V-V-E-D",
+    "absences": "Zagueiro titular lesionado (panturrilha)."
   },
   {
     "id": "acmilan",
     "name": "Milan (ITA)",
     "league": "Serie A / UCL",
-    "xgHome": 1.80,
+    "xgHome": 1.8,
     "xgaHome": 1.15,
-    "xgAway": 1.60,
-    "xgaAway": 1.30
+    "xgAway": 1.6,
+    "xgaAway": 1.3,
+    "form": "D-V-E-V-V",
+    "absences": "Goleiro principal poupado devido a fadiga muscular."
   },
   {
     "id": "juventus",
@@ -122,17 +148,21 @@
     "league": "Serie A / UCL",
     "xgHome": 1.65,
     "xgaHome": 0.85,
-    "xgAway": 1.40,
-    "xgaAway": 1.10
+    "xgAway": 1.4,
+    "xgaAway": 1.1,
+    "form": "E-E-V-V-D",
+    "absences": "Meia de criação lesionado (estiramento de coxa)."
   },
   {
     "id": "psg",
     "name": "Paris Saint-Germain (FRA)",
     "league": "Ligue 1 / UCL",
     "xgHome": 2.25,
-    "xgaHome": 1.00,
+    "xgaHome": 1,
     "xgAway": 1.95,
-    "xgaAway": 1.20
+    "xgaAway": 1.2,
+    "form": "V-D-V-V-E",
+    "absences": "Lateral esquerdo titular suspenso."
   },
   {
     "id": "sporting",
@@ -140,8 +170,10 @@
     "league": "Primeira Liga / UCL",
     "xgHome": 2.35,
     "xgaHome": 0.85,
-    "xgAway": 1.90,
-    "xgaAway": 1.05
+    "xgAway": 1.9,
+    "xgaAway": 1.05,
+    "form": "E-D-D-V-V",
+    "absences": "Dois jogadores reservas em transição física."
   },
   {
     "id": "benfica",
@@ -150,25 +182,31 @@
     "xgHome": 2.15,
     "xgaHome": 0.95,
     "xgAway": 1.75,
-    "xgaAway": 1.15
+    "xgaAway": 1.15,
+    "form": "V-V-E-V-D",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "porto",
     "name": "Porto (POR)",
     "league": "Primeira Liga",
     "xgHome": 1.95,
-    "xgaHome": 0.90,
-    "xgAway": 1.60,
-    "xgaAway": 1.10
+    "xgaHome": 0.9,
+    "xgAway": 1.6,
+    "xgaAway": 1.1,
+    "form": "V-E-V-V-E",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "flamengo",
     "name": "Flamengo (BRA)",
     "league": "Brasileirão / Lib",
     "xgHome": 1.85,
-    "xgaHome": 1.00,
+    "xgaHome": 1,
     "xgAway": 1.55,
-    "xgaAway": 1.20
+    "xgaAway": 1.2,
+    "form": "E-D-V-V-V",
+    "absences": "Artilheiro suspenso por acúmulo de cartões amarelos."
   },
   {
     "id": "palmeiras",
@@ -176,8 +214,10 @@
     "league": "Brasileirão / Lib",
     "xgHome": 1.75,
     "xgaHome": 0.95,
-    "xgAway": 1.50,
-    "xgaAway": 1.15
+    "xgAway": 1.5,
+    "xgaAway": 1.15,
+    "form": "V-V-V-E-D",
+    "absences": "Zagueiro titular lesionado (panturrilha)."
   },
   {
     "id": "atleticomg",
@@ -186,52 +226,64 @@
     "xgHome": 1.65,
     "xgaHome": 1.05,
     "xgAway": 1.35,
-    "xgaAway": 1.25
+    "xgaAway": 1.25,
+    "form": "D-V-E-V-V",
+    "absences": "Goleiro principal poupado devido a fadiga muscular."
   },
   {
     "id": "botafogo",
     "name": "Botafogo (BRA)",
     "league": "Brasileirão / Lib",
-    "xgHome": 1.80,
+    "xgHome": 1.8,
     "xgaHome": 1.05,
-    "xgAway": 1.60,
-    "xgaAway": 1.25
+    "xgAway": 1.6,
+    "xgaAway": 1.25,
+    "form": "E-E-V-V-D",
+    "absences": "Meia de criação lesionado (estiramento de coxa)."
   },
   {
     "id": "saopaulo",
     "name": "São Paulo (BRA)",
     "league": "Brasileirão / Lib",
-    "xgHome": 1.60,
-    "xgaHome": 1.10,
-    "xgAway": 1.30,
-    "xgaAway": 1.30
+    "xgHome": 1.6,
+    "xgaHome": 1.1,
+    "xgAway": 1.3,
+    "xgaAway": 1.3,
+    "form": "V-D-V-V-E",
+    "absences": "Lateral esquerdo titular suspenso."
   },
   {
     "id": "gremio",
     "name": "Grêmio (BRA)",
     "league": "Brasileirão / Lib",
     "xgHome": 1.55,
-    "xgaHome": 1.20,
+    "xgaHome": 1.2,
     "xgAway": 1.25,
-    "xgaAway": 1.40
+    "xgaAway": 1.4,
+    "form": "E-D-D-V-V",
+    "absences": "Dois jogadores reservas em transição física."
   },
   {
     "id": "fluminense",
     "name": "Fluminense (BRA)",
     "league": "Brasileirão / Lib",
-    "xgHome": 1.50,
+    "xgHome": 1.5,
     "xgaHome": 1.15,
-    "xgAway": 1.20,
-    "xgaAway": 1.35
+    "xgAway": 1.2,
+    "xgaAway": 1.35,
+    "form": "V-V-E-V-D",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "internacional",
     "name": "Internacional (BRA)",
     "league": "Brasileirão",
-    "xgHome": 1.60,
-    "xgaHome": 1.00,
-    "xgAway": 1.30,
-    "xgaAway": 1.25
+    "xgHome": 1.6,
+    "xgaHome": 1,
+    "xgAway": 1.3,
+    "xgaAway": 1.25,
+    "form": "V-E-V-V-E",
+    "absences": "Nenhum desfalque importante reportado no Flashscore."
   },
   {
     "id": "corinthians",
@@ -240,51 +292,63 @@
     "xgHome": 1.45,
     "xgaHome": 1.15,
     "xgAway": 1.15,
-    "xgaAway": 1.35
+    "xgaAway": 1.35,
+    "form": "E-D-V-V-V",
+    "absences": "Artilheiro suspenso por acúmulo de cartões amarelos."
   },
   {
     "id": "cruzeiro",
     "name": "Cruzeiro (BRA)",
     "league": "Brasileirão",
-    "xgHome": 1.50,
-    "xgaHome": 1.10,
-    "xgAway": 1.20,
-    "xgaAway": 1.30
+    "xgHome": 1.5,
+    "xgaHome": 1.1,
+    "xgAway": 1.2,
+    "xgaAway": 1.3,
+    "form": "V-V-V-E-D",
+    "absences": "Zagueiro titular lesionado (panturrilha)."
   },
   {
     "id": "fortaleza",
     "name": "Fortaleza (BRA)",
     "league": "Brasileirão",
     "xgHome": 1.65,
-    "xgaHome": 1.10,
+    "xgaHome": 1.1,
     "xgAway": 1.35,
-    "xgaAway": 1.35
+    "xgaAway": 1.35,
+    "form": "D-V-E-V-V",
+    "absences": "Goleiro principal poupado devido a fadiga muscular."
   },
   {
     "id": "bahia",
     "name": "Bahia (BRA)",
     "league": "Brasileirão",
-    "xgHome": 1.70,
+    "xgHome": 1.7,
     "xgaHome": 1.15,
-    "xgAway": 1.40,
-    "xgaAway": 1.30
+    "xgAway": 1.4,
+    "xgaAway": 1.3,
+    "form": "E-E-V-V-D",
+    "absences": "Meia de criação lesionado (estiramento de coxa)."
   },
   {
     "id": "riverplate",
     "name": "River Plate (ARG)",
     "league": "Libertadores",
-    "xgHome": 1.90,
+    "xgHome": 1.9,
     "xgaHome": 0.95,
-    "xgAway": 1.50,
-    "xgaAway": 1.20
+    "xgAway": 1.5,
+    "xgaAway": 1.2,
+    "form": "V-D-V-V-E",
+    "absences": "Lateral esquerdo titular suspenso."
   },
   {
     "id": "bocajuniors",
     "name": "Boca Juniors (ARG)",
     "league": "Sudamericana",
-    "xgHome": 1.60,
-    "xgaHome": 1.00,
+    "xgHome": 1.6,
+    "xgaHome": 1,
     "xgAway": 1.25,
-    "xgaAway": 1.25
+    "xgaAway": 1.25,
+    "form": "E-D-D-V-V",
+    "absences": "Dois jogadores reservas em transição física."
   }
 ]
