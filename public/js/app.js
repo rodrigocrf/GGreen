@@ -679,7 +679,7 @@ function loadSelectedTeamStats() {
   if (DOM.inputXgAway) DOM.inputXgAway.value = awayTeam.xgAway.toFixed(2);
   if (DOM.inputXgaAway) DOM.inputXgaAway.value = awayTeam.xgaAway.toFixed(2);
 
-  addLog(`Estatísticas do Understat/FBref para [${homeTeam.name}] (C) e [${awayTeam.name}] (F) carregadas nos campos.`, 'success');
+  addLog(`Estatísticas e dados (Understat/FBref/Flashscore) para [${homeTeam.name}] (C) e [${awayTeam.name}] (F) carregados nos campos.`, 'success');
 }
 
 /**
