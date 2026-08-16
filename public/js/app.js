@@ -524,11 +524,7 @@ function filterTeamsByLeague() {
   // Filtra times pertencentes à liga selecionada
   let filtered = [];
   if (leagueVal === 'brasileirao') {
-    filtered = cacheTeams.filter((t) => 
-      t.league.includes('Brasileirão') || 
-      t.league.includes('Lib') || 
-      t.league.includes('Sudamericana')
-    );
+    filtered = cacheTeams.filter((t) => t.league.includes('Brasileirão'));
   } else if (leagueVal === 'premier') {
     filtered = cacheTeams.filter((t) => t.league.includes('Premier League'));
   } else if (leagueVal === 'laliga') {
@@ -538,10 +534,12 @@ function filterTeamsByLeague() {
   } else if (leagueVal === 'seriea') {
     filtered = cacheTeams.filter((t) => t.league.includes('Serie A'));
   } else if (leagueVal === 'europe') {
-    // Demais ligas continentais como francesa (Ligue 1) e portuguesa (Primeira Liga)
+    // Demais equipes europeias (Ligue 1, Primeira Liga) e sul-americanas que não disputam o Brasileirão (argentinos)
     filtered = cacheTeams.filter((t) => 
       t.league.includes('Ligue 1') || 
-      t.league.includes('Primeira Liga')
+      t.league.includes('Primeira Liga') ||
+      t.id === 'riverplate' ||
+      t.id === 'bocajuniors'
     );
   }
 
