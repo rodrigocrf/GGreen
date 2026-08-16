@@ -339,7 +339,14 @@ input::placeholder {
   height: 100%;
 }
 
-.btn-container-align button {
+.btn-container-align label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: 4px;
+}
+
+.btn-container-align #btn-load-stats {
   height: 42px;
   display: flex;
   align-items: center;
